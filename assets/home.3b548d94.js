@@ -1,0 +1,1 @@
+import{_ as e,o as t,c as o}from"./index.345c7b78.js";const s={setup(){return{}}},r={class:"title"};function c(a,n,_,p,f,i){return t(),o("h2",r,"\u7B2C\u4E00\u9801\u7531\u6B64\u958B\u59CB")}var u=e(s,[["render",c]]);export{u as default};
