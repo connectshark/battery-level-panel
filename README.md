@@ -1,4 +1,4 @@
-# vite-template
+# battery-level-panel
 
 [vue cli + vue3模板](https://github.com/connectshark/vue3-template)
 
