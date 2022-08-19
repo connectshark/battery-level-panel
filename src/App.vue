@@ -15,7 +15,7 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: 'Roboto Mono', 'Noto Sans TC', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   background-color: hsl(0, 0%, 15%);
   min-height: 100vh;
   display: grid;
