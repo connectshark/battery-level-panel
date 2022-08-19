@@ -1,5 +1,10 @@
 <template>
 <div class="panel">
+  <button class="toggle" @click="useCustomLevel = !useCustomLevel">
+    <i v-if="useCustomLevel" class='bx active bx-md bxs-toggle-right' ></i>
+    <i v-else class='bx bx-md bx-toggle-left'></i>
+    <span>Use custom battery level</span>
+  </button>
   <div class="title">
     <h1>Battery</h1>
     <p>{{levelPercent}}%</p>
@@ -33,18 +38,39 @@
       ></div>
     </div>
   </div>
+  <Transition name="slide">
+    <div class="level-bar" v-if="useCustomLevel">
+      <input type="range" min="0.01" max="1" step="0.01" v-model.number="customLevel">
+      <span>{{ levelPercent }}</span>
+    </div>
+  </Transition>
 </div>
 </template>
 <script>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { useBattery } from '@vueuse/core'
 export default {
   setup() {
     const { level, charging } = useBattery()
-    const levelPercent = computed(() => level.value * 100) 
+    const useCustomLevel = ref(false)
+    const customLevel = ref(0.5)
+    const levelPercent = computed(() => {
+      if (useCustomLevel.value) {
+        console.log(customLevel.value)
+        return parseInt(customLevel.value * 100)
+      } else {
+        return parseInt(level.value * 100)
+      }
+    })
+
+
+
+
     return {
       levelPercent,
-      charging
+      charging,
+      useCustomLevel,
+      customLevel
     }
   }
 }
@@ -64,11 +90,58 @@ export default {
   box-sizing: border-box;
   display: grid;
   grid-template-columns: auto 100px;
-  grid-auto-rows: auto;
+  grid-template-rows: 80% 20%;
+  position: relative;
+  .toggle{
+    position: absolute;
+    background-color: inherit;
+    bottom: 110%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 3rem;
+    padding: .2rem 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    color: #fff;
+    font-size: 1rem;
+    .active {
+      color: #64EB49;
+    }
+  }
+  .level-bar {
+    position: absolute;
+    background-color: inherit;
+    top: 110%;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 3rem;
+    padding: .2rem 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    justify-content: space-between;
+    input {
+      margin: 0;
+      width: 100%;
+    }
+    span {
+      flex-shrink: 0;
+      font-size: 1rem;
+      width: 50px;
+      text-align: right;
+    }
+  }
   .title {
     display: flex;
     flex-flow: column nowrap;
-    justify-content: flex-end;
+    justify-content: center;
     h1 {
       font-size: 1rem;
     }
@@ -108,7 +181,7 @@ export default {
       .liquid {
         flex-shrink: 0;
         position: relative;
-        height: 20%;
+        transition: height .3s linear;
         box-shadow: inset -10px 0 12px hsla(0, 0%, 0%, .1),
           inset 12px 0 12px hsla(0, 0%, 0%, .15);
         &::before {
@@ -125,6 +198,18 @@ export default {
       }
     }
   }
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: opacity .5s ease,
+    transform .5s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  transform: translateY(-2rem);
+  opacity: 0;
 }
 
 .almost-nothing {
