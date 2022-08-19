@@ -1,41 +1,22 @@
 # battery-level-panel
 
-[vue cli + vue3模板](https://github.com/connectshark/vue3-template)
+[![GitHub last commit](https://img.shields.io/github/last-commit/connectshark/battery-level-panel.svg?style=flat)](https://github.com/connectshark/battery-level-panel)
+![GitHub stars](https://img.shields.io/github/stars/connectshark/battery-level-panel.svg?style=social&label=Stars&style=plastic)
 
-開發vue3使用的快速模板
 
-## 專案已包含內容
+**專案靈感來自於[Bedimcode](https://youtu.be/0gV3kmnLir0)的影片**
+主要參照ui顏色設計
+剩餘內容使用前端常用框架完成
 
-### 插件
+[![responsive-personal-orange-portfolio](readme/demo.png)](https://connectshark.github.io/responsive-personal-orange-portfolio/index.html)
 
-- vue cli
-- vue3
-- vue-router
-- vuex
+- [Live Demo](https://connectshark.github.io/responsive-personal-orange-portfolio/index.html)
 
-### cdn
 
-- [boxicon](https://boxicons.com/)
-- Roboto Mono字型
-- Noto Sans TC字型
+## 專案內容
 
-### github
-
-- github action自動部署置`gh-page`
-
-## 使用template首次設定
-
-你可以點選 `use this template` 直接將此模板複製到自己的github上
-
-接者你需要手動修改幾個部分
-
-### 1. 專案更名
-
-- `package.json`中的專案名稱
-- `package-lock.json`中的專案名稱
-- `vite.config.js`中的`base`
-主要是把專案名稱命名為自訂的專案名稱
-
-### 2. 推上github後開啟專案page的功能
-
-`setting` -> `page` -> `source` -> 選擇 `gh-page`
+- vue
+- scss
+- 使用CSS變數
+- grid排版
+- 新增額外自訂電量功能
