@@ -6,7 +6,7 @@
     <span>Use custom battery level</span>
   </button>
   <div class="title">
-    <template v-if="isSupported">
+    <template v-if="useCustomLevel || isSupported">
       <h1>Battery</h1>
       <p>{{levelPercent}}%</p>
     </template>
