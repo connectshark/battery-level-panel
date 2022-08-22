@@ -6,8 +6,11 @@
     <span>Use custom battery level</span>
   </button>
   <div class="title">
-    <h1>Battery</h1>
-    <p>{{levelPercent}}%</p>
+    <template v-if="isSupported">
+      <h1>Battery</h1>
+      <p>{{levelPercent}}%</p>
+    </template>
+    <p v-else>Device is not Supported</p>
   </div>
   <p class="state">
     <template v-if="charging">
@@ -51,7 +54,7 @@ import { computed, ref } from 'vue'
 import { useBattery } from '@vueuse/core'
 export default {
   setup() {
-    const { level, charging } = useBattery()
+    const { level, charging, isSupported } = useBattery()
     const useCustomLevel = ref(false)
     const customLevel = ref(0.5)
     const levelPercent = computed(() => {
@@ -70,7 +73,8 @@ export default {
       levelPercent,
       charging,
       useCustomLevel,
-      customLevel
+      customLevel,
+      isSupported
     }
   }
 }
